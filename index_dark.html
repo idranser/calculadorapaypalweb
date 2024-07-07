@@ -258,7 +258,7 @@ function other_calcs_onmouseout() {
 </script>
 
 </head>
-<body style="background-color:#D8E2EC;">
+<body style="background-color:#101D25;">
 <form id="ppcalc_form" action="" method="post">
   <table border="0" cellpadding="0" cellspacing="0" style="margin-top:0px;margin-left:auto;margin-right:auto">
 
@@ -276,20 +276,20 @@ function other_calcs_onmouseout() {
 <div id="PayPal_fee_rate_div" class="bg">
   <table width="230" border="0" align="center" cellpadding="1" cellspacing="1" class="bg">
   <tr>
-    <td  colspan="3" class="head style3 style8"size="30" style="WIDTH: 150px; HEIGHT: 50px; font-size: 16pt;"><div align="center" class="style5"><u><strong>CALCULADORA PARA RECIBIR</strong></u></div></td>
+    <td  colspan="3" class="head style3 style8"size="30" style="WIDTH: 150px; HEIGHT: 50px; font-size: 16pt;"><div align="center" class="style5" style="color: white"><u><strong>CALCULADORA PARA RECIBIR</strong></u></div></td>
   </tr>
   <tr>
     <td class="left top"><span class="style5">
-      <b><label for="to_receive"><span class="style5">- Para recibir:</span></label></b>
+      <b><label for="to_receive" style="color: white"><span class="style5">- Para recibir:</span></label></b>
     </span></td>
-    <td class="mid top" valign="bottom"><span class="style5" id="currency_symbol_1">$</span></td>
+    <td class="mid top" valign="bottom"><span class="style5" style="color: white" id="currency_symbol_1">$</span></td>
     <td class="right top" valign="bottom"><input name="to_receive" type="number" class="text_box " id="to_receive" size="6" /></td>
   </tr>
   <tr>
     <td class="left"><span class="style10">
-      <label for="a_person_would" class="style5">- Enviar:</label>
+      <label for="a_person_would" class="style5" style="color: white">- Enviar:</label>
     </span></td>
-    <td class="mid" valign="bottom"><span class="style5" id="currency_symbol_2">$</span></td>
+    <td class="mid" valign="bottom"><span class="style5" style="color: white" id="currency_symbol_2">$</span></td>
     <td class="right" valign="bottom"><input name="a_person_would" type="text" class="text_box " id="a_person_would" size="6" readonly="readonly" /></td>
   </tr>
   <tr>
@@ -298,43 +298,43 @@ function other_calcs_onmouseout() {
 </table>
     <table width="260" border="0" align="center" cellpadding="1" cellspacing="1" class="bg">
   <tr>
-<td colspan="3" class="head style3 style8"size="30" style="WIDTH: 150px; HEIGHT: 50px; font-size: 16pt;"><div align="center" class="style5"><u><strong>CALCULADORA PARA ENVIAR</strong></u></div></td>
+<td colspan="3" class="head style3 style8"size="30" style="WIDTH: 150px; HEIGHT: 50px; font-size: 16pt;"><div align="center" class="style5" style="color: white"><u><strong>CALCULADORA PARA ENVIAR</strong></u></div></td>
   </tr>
   <tr>
     <td class="left top"><span class="style5">
-      <b><label for="if_you_receive">- Si se envían:</label></b>
+      <b><label for="if_you_receive" style="color: white">- Si se envían:</label></b>
     </span></td>
-    <td class="mid top"><span class="style5" id="currency_symbol_3">$</span></td>
+    <td class="mid top"><span class="style5" style="color: white" id="currency_symbol_3">$</span></td>
     <td class="right top"><input name="if_you_receive" type="number" class="text_box " id="if_you_receive" size="6" /></td>
   </tr>
   <tr>
     <td class="left"><span class="style5">
-      <label for="PayPal_fees">- La comisión es:</label>
+      <label for="PayPal_fees" style="color: white">- La comisión es:</label>
     </span></td>
-    <td class="mid"><span class="style5" id="currency_symbol_4">$</span></td>
+    <td class="mid"><span class="style5" style="color: white" id="currency_symbol_4">$</span></td>
     <td class="right"><input name="PayPal_fees" type="text" class="text_box " id="PayPal_fees" size="6" readonly="readonly" /></td>
   </tr>
   <tr>
     <td class="left"><span class="style10">
-      <label for="you_would_receive" class="style5">- Se reciben:</label>
+      <label for="you_would_receive" class="style5" style="color: white">- Se reciben:</label>
     </span></td>
-    <td class="mid"><span class="style5" id="currency_symbol_5">$</span></td>
+    <td class="mid"><span class="style5" style="color: white" id="currency_symbol_5">$</span></td>
     <td class="right"><input name="you_would_receive" type="text" class="text_box " id="you_would_receive" size="6" readonly="readonly" /></td>
   </tr>
   <tr>
     <td colspan="3" class="bottom"></td>
   </tr>
 </table>
-    <div align="center" class="style6" style="font-size: 12pt;" >Cambiar comisión de PayPal:</div>
+    <div align="center" class="style6" style="color: white" style="font-size: 12pt;" >Cambiar comisión de PayPal:</div>
 <table border="0" cellpadding="0" cellspacing="5" align="center">
 <tr>
 <td><input type="text" class="text_box text_box_percent" name="PayPal_fee_percent" id="PayPal_fee_percent" size="3" value="5.4" onKeyUp="PPCalculate();RPPCalculate(1);" /></td>
-<td><label for="PayPal_fee_fixed"><span class="style5">%&nbsp;&nbsp;+&nbsp;&nbsp;<span id="currency_sign">$</span></span></label></td>
+<td><label for="PayPal_fee_fixed"><span class="style5" style="color: white">%&nbsp;&nbsp;+&nbsp;&nbsp;<span id="currency_sign">$</span></span></label></td>
 <td><input type="text" class="text_box text_box_percent" name="PayPal_fee_fixed" id="PayPal_fee_fixed" size="4" value="0.30" onKeyUp="PPCalculate();RPPCalculate(1);" /></td>
 <td><span class="style3"> <span class="style13">
-  <label for="PayPal_fee_fixed" class="style5" id="currency_name">USD</label>
+  <label for="PayPal_fee_fixed" class="style5" style="color: white" id="currency_name">USD</label>
 </span> </span></td>
-<td style="padding-bottom:3px"><a href="https://www.PayPal.com/webapps/mpp/PayPal-fees" class="style5" style="font:normal 10px verdana,sans-serif" onClick="return !window.open(this.href)">ayúdame a decidir</a></td>
+<td style="padding-bottom:3px" style="color: white"><a href="https://www.PayPal.com/webapps/mpp/PayPal-fees" class="style5" style="color: white" style="font:normal 10px verdana,sans-serif" style="color: white" onClick="return !window.open(this.href)">ayúdame a decidir</a></td>
 </tr>
 </table>
 </div>
@@ -343,7 +343,7 @@ function other_calcs_onmouseout() {
 <tr>
 
  <td style="padding-right:5px"><div style="visibility: hidden;"><input type="checkbox" name="crossborder_checkbox" id="crossborder_checkbox" /></div></td>
- <td style="text-align:left"><label for="crossborder_checkbox" class="style5">
+ <td style="text-align:left"><label for="crossborder_checkbox" class="style5" style="color: white">
    <div align="center"><span class="style4">Si recibirás un pago de otro país<br />
      haz clic en la bandera correspondiente:</span></div>
  </label></td>

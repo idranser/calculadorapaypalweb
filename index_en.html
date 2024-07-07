@@ -1,26 +1,25 @@
 <html>
 <head>
-<title>Calculadora para PayPal</title>
+<title>PayPal Fee Calculator</title>
 <link rel="apple-touch-icon" href="images/ppfc-web-icon.png" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"> 
 <meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
-<meta name="description" content="Calcule cuánto usted tiene que pagar las tarifas de PayPal, o cuánto enviar para asegurarse de que la otra persona reciba la cantidad correcta.">
-    <meta name="keywords" content="PayPal, calculadora, fees, tasas, pagos, getrepaid">
+<meta name="description" content="Figure out how much you are going to have to pay in paypal fees, or how much to send to make sure the other person gets the correct amount.">
+    <meta name="keywords" content="paypal, calculator, fees, rates, payments, getrepaid">
 	<meta name="copyright" content="Copyright © 2015">
     <meta name="author" content="Calculadora para PayPal">
     <meta name="Charset" content="UTF-8">
     <meta name="Rating" content="General">
     <meta name="apple-touch-fullscreen" content="YES" /> 
-<title>Calculadora de comisiones PayPal</title>
+<title>PayPal Fee Calculator</title>
 <link rel="stylesheet" type="text/css" href="ppfc.css">
 <style type="text/css">
 <!--
-.style2 {font-family: Courier New, sans-serif; font-size: 12px; }
 .style3 {font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
 .style4 {font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
 .style5 {font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
-.style6 {font-family: Trebuchet MS, sans-serif; font-size: 11px; font-weight: bold; }
+.style6 {font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; }
 min-height:500px;
 -->
 </style>
@@ -37,7 +36,7 @@ min-height:500px;
 
 var isMSIE = /*@cc_on!@*/false;
 
-var mode = 'flag_peru';
+var mode = 'flag_united_states';
 
 function rate_changed(new_mode) {
  if ((typeof new_mode == 'string') && (new_mode.substr(0,5) == 'flag_')) { mode = new_mode; }
@@ -127,7 +126,7 @@ function textbox_onkeypress(e) {
    }
    break;
   case 48: case 49: case 50: case 51: case 52: case 53: case 54: case 55: case 56: case 57:
-   if ((this.id != 'PayPal_fee_percent')) {
+   if ((this.id != 'paypal_fee_percent')) {
     if ( this.value.length >= 3) {
      if ( this.value.substr(this.value.length - 3, 1) == '.' ) {
       if (has_selection(this) == false) { to_return = false; } // no good
@@ -145,8 +144,8 @@ function textbox_onkeypress(e) {
 }
 
 function set_pp_rate(percent,fixed,sign,name){
- document.forms['ppcalc_form'].elements['PayPal_fee_percent'].value = percent;
- document.forms['ppcalc_form'].elements['PayPal_fee_fixed'].value = fixed;
+ document.forms['ppcalc_form'].elements['paypal_fee_percent'].value = percent;
+ document.forms['ppcalc_form'].elements['paypal_fee_fixed'].value = fixed;
  document.getElementById('currency_sign').innerHTML = sign;
  document.getElementById('currency_name').innerHTML = name;
  document.getElementById('currency_symbol_1').innerHTML = sign;
@@ -171,17 +170,17 @@ function figure_fees(item_price, fee_percentage, fixed_fee) {
 function PPCalculate() {
  if (document.forms['ppcalc_form'].elements['if_you_receive'].value != '') {
   var amount_sent = get_float(document.forms['ppcalc_form'].elements['if_you_receive'].value);
-  if (amount_sent == 0) { document.forms['ppcalc_form'].elements['PayPal_fees'].value = document.forms['ppcalc_form'].elements['you_would_receive'].value = '0.00'; }
+  if (amount_sent == 0) { document.forms['ppcalc_form'].elements['paypal_fees'].value = document.forms['ppcalc_form'].elements['you_would_receive'].value = '0.00'; }
   else {
-   var the_PayPal_fees = figure_fees(amount_sent, get_float(document.forms['ppcalc_form'].elements['PayPal_fee_percent'].value), get_float(document.forms['ppcalc_form'].elements['PayPal_fee_fixed'].value));
-   document.forms['ppcalc_form'].elements['PayPal_fees'].value = the_PayPal_fees.toFixed(2);
-   var amount_after_fees = amount_sent - get_float(document.forms['ppcalc_form'].elements['PayPal_fees'].value);
+   var the_paypal_fees = figure_fees(amount_sent, get_float(document.forms['ppcalc_form'].elements['paypal_fee_percent'].value), get_float(document.forms['ppcalc_form'].elements['paypal_fee_fixed'].value));
+   document.forms['ppcalc_form'].elements['paypal_fees'].value = the_paypal_fees.toFixed(2);
+   var amount_after_fees = amount_sent - get_float(document.forms['ppcalc_form'].elements['paypal_fees'].value);
    if (amount_after_fees < 0) { amount_after_fees = 0; }
    document.forms['ppcalc_form'].elements['you_would_receive'].value = amount_after_fees.toFixed(2);
   }
  }
  else {
-  document.forms['ppcalc_form'].elements['PayPal_fees'].value = '';
+  document.forms['ppcalc_form'].elements['paypal_fees'].value = '';
   document.forms['ppcalc_form'].elements['you_would_receive'].value = '';
  }
 }
@@ -191,7 +190,7 @@ function RPPCalculate(src) {
   var desired_amount = get_float(document.forms['ppcalc_form'].elements['to_receive'].value);
   if (desired_amount == 0) { document.forms['ppcalc_form'].elements['a_person_would'].value = '0.00'; }
   else {
-   var a_person_must_send = (desired_amount + get_float(document.forms['ppcalc_form'].elements['PayPal_fee_fixed'].value)) / (1 - (get_float(document.forms['ppcalc_form'].elements['PayPal_fee_percent'].value)/100).toFixed(4));
+   var a_person_must_send = (desired_amount + get_float(document.forms['ppcalc_form'].elements['paypal_fee_fixed'].value)) / (1 - (get_float(document.forms['ppcalc_form'].elements['paypal_fee_percent'].value)/100).toFixed(4));
    document.forms['ppcalc_form'].elements['a_person_would'].value = a_person_must_send.toFixed(2);
    document.forms['ppcalc_form'].elements['if_you_receive'].value = document.forms['ppcalc_form'].elements['a_person_would'].value;
    PPCalculate();
@@ -212,8 +211,8 @@ else if (window.attachEvent) { window.attachEvent("onload", window_onload); }
 function window_onload() {
  document.forms['ppcalc_form'].elements['to_receive'].onkeypress = textbox_onkeypress;
  document.forms['ppcalc_form'].elements['if_you_receive'].onkeypress = textbox_onkeypress;
- document.forms['ppcalc_form'].elements['PayPal_fee_percent'].onkeypress = textbox_onkeypress;
- document.forms['ppcalc_form'].elements['PayPal_fee_fixed'].onkeypress = textbox_onkeypress;
+ document.forms['ppcalc_form'].elements['paypal_fee_percent'].onkeypress = textbox_onkeypress;
+ document.forms['ppcalc_form'].elements['paypal_fee_fixed'].onkeypress = textbox_onkeypress;
  document.forms['ppcalc_form'].elements['to_receive'].onkeyup = RPPCalculate;
  document.forms['ppcalc_form'].elements['if_you_receive'].onkeyup = PPCalculate;
  document.forms['ppcalc_form'].elements['crossborder_checkbox'].onclick = rate_changed;
@@ -256,7 +255,6 @@ function other_calcs_onmouseout() {
 
 /* ]]> */
 </script>
-
 </head>
 <body style="background-color:#D8E2EC;">
 <form id="ppcalc_form" action="" method="post">
@@ -273,21 +271,21 @@ function other_calcs_onmouseout() {
 </tr>
 </table>
 <!-- PayPal Fee Rate Box -->
-<div id="PayPal_fee_rate_div" class="bg">
-  <table width="230" border="0" align="center" cellpadding="1" cellspacing="1" class="bg">
+<div id="paypal_fee_rate_div" class="bg">
+  <table width="230" border="0" align="center" cellpadding="0" cellspacing="0" class="bg">
   <tr>
-    <td  colspan="3" class="head style3 style8"size="30" style="WIDTH: 150px; HEIGHT: 50px; font-size: 16pt;"><div align="center" class="style5"><u><strong>CALCULADORA PARA RECIBIR</strong></u></div></td>
+    <td colspan="3" class="head style3 style8"size="30" style="WIDTH: 150px; HEIGHT: 50px; font-family: Verdana; font-size: 16pt;"><div align="center" class="style5"><u><strong>Reverse PayPal Fee Calculator</strong></u></div></td>
   </tr>
   <tr>
-    <td class="left top"><span class="style5">
-      <b><label for="to_receive"><span class="style5">- Para recibir:</span></label></b>
+    <td class="left top"><span class="style10">
+      <label for="to_receive"><span class="style5">To receive:</span></label>
     </span></td>
     <td class="mid top" valign="bottom"><span class="style5" id="currency_symbol_1">$</span></td>
     <td class="right top" valign="bottom"><input name="to_receive" type="number" class="text_box " id="to_receive" size="6" /></td>
   </tr>
   <tr>
     <td class="left"><span class="style10">
-      <label for="a_person_would" class="style5">- Enviar:</label>
+      <label for="a_person_would" class="style5">Send:</label>
     </span></td>
     <td class="mid" valign="bottom"><span class="style5" id="currency_symbol_2">$</span></td>
     <td class="right" valign="bottom"><input name="a_person_would" type="text" class="text_box " id="a_person_would" size="6" readonly="readonly" /></td>
@@ -298,25 +296,25 @@ function other_calcs_onmouseout() {
 </table>
     <table width="260" border="0" align="center" cellpadding="1" cellspacing="1" class="bg">
   <tr>
-<td colspan="3" class="head style3 style8"size="30" style="WIDTH: 150px; HEIGHT: 50px; font-size: 16pt;"><div align="center" class="style5"><u><strong>CALCULADORA PARA ENVIAR</strong></u></div></td>
+<td colspan="3" class="head style3 style8"size="30" style="WIDTH: 150px; HEIGHT: 50px; font-family: Verdana; font-size: 16pt;"><div align="center" class="style5"><u><strong>PayPal Fee Calculator</strong></u></div></td>
   </tr>
   <tr>
     <td class="left top"><span class="style5">
-      <b><label for="if_you_receive">- Si se envían:</label></b>
+      <label for="if_you_receive">If send:</label>
     </span></td>
     <td class="mid top"><span class="style5" id="currency_symbol_3">$</span></td>
     <td class="right top"><input name="if_you_receive" type="number" class="text_box " id="if_you_receive" size="6" /></td>
   </tr>
   <tr>
     <td class="left"><span class="style5">
-      <label for="PayPal_fees">- La comisión es:</label>
+      <label for="paypal_fees">PayPal fees:</label>
     </span></td>
     <td class="mid"><span class="style5" id="currency_symbol_4">$</span></td>
-    <td class="right"><input name="PayPal_fees" type="text" class="text_box " id="PayPal_fees" size="6" readonly="readonly" /></td>
+    <td class="right"><input name="paypal_fees" type="text" class="text_box " id="paypal_fees" size="6" readonly="readonly" /></td>
   </tr>
   <tr>
     <td class="left"><span class="style10">
-      <label for="you_would_receive" class="style5">- Se reciben:</label>
+      <label for="you_would_receive" class="style5">You would receive:</label>
     </span></td>
     <td class="mid"><span class="style5" id="currency_symbol_5">$</span></td>
     <td class="right"><input name="you_would_receive" type="text" class="text_box " id="you_would_receive" size="6" readonly="readonly" /></td>
@@ -325,53 +323,54 @@ function other_calcs_onmouseout() {
     <td colspan="3" class="bottom"></td>
   </tr>
 </table>
-    <div align="center" class="style6" style="font-size: 12pt;" >Cambiar comisión de PayPal:</div>
+    <div align="center" class="style6"style="font-size: 11pt;" >Enter your PayPal fee rate below:</div>
 <table border="0" cellpadding="0" cellspacing="5" align="center">
+
 <tr>
-<td><input type="text" class="text_box text_box_percent" name="PayPal_fee_percent" id="PayPal_fee_percent" size="3" value="5.4" onKeyUp="PPCalculate();RPPCalculate(1);" /></td>
-<td><label for="PayPal_fee_fixed"><span class="style5">%&nbsp;&nbsp;+&nbsp;&nbsp;<span id="currency_sign">$</span></span></label></td>
-<td><input type="text" class="text_box text_box_percent" name="PayPal_fee_fixed" id="PayPal_fee_fixed" size="4" value="0.30" onKeyUp="PPCalculate();RPPCalculate(1);" /></td>
+<td><input type="text" class="text_box text_box_percent" name="paypal_fee_percent" id="paypal_fee_percent" size="3" value="2.9" onKeyUp="PPCalculate();RPPCalculate(1);" /></td>
+<td><label for="paypal_fee_fixed"><span class="style5">%&nbsp;&nbsp;+&nbsp;&nbsp;<span id="currency_sign">$</span></span></label></td>
+<td><input type="text" class="text_box text_box_percent" name="paypal_fee_fixed" id="paypal_fee_fixed" size="4" value="0.30" onKeyUp="PPCalculate();RPPCalculate(1);" /></td>
 <td><span class="style3"> <span class="style13">
-  <label for="PayPal_fee_fixed" class="style5" id="currency_name">USD</label>
+  <label for="paypal_fee_fixed" class="style5" id="currency_name">USD</label>
 </span> </span></td>
-<td style="padding-bottom:3px"><a href="https://www.PayPal.com/webapps/mpp/PayPal-fees" class="style5" style="font:normal 10px verdana,sans-serif" onClick="return !window.open(this.href)">ayúdame a decidir</a></td>
+<td style="padding-bottom:3px"><a href="https://www.paypal.com/webapps/mpp/paypal-fees" class="style5" style="font:normal 10px verdana,sans-serif" onClick="return !window.open(this.href)">help me decide</a></td>
 </tr>
 </table>
 </div>
 
-<table width="294" border="0" align="center" cellpadding="0" cellspacing="0">
+<table width="294" border="0" align="center" cellpadding="1" cellspacing="1">
 <tr>
 
  <td style="padding-right:5px"><div style="visibility: hidden;"><input type="checkbox" name="crossborder_checkbox" id="crossborder_checkbox" /></div></td>
  <td style="text-align:left"><label for="crossborder_checkbox" class="style5">
-   <div align="center"><span class="style4">Si recibirás un pago de otro país<br />
-     haz clic en la bandera correspondiente:</span></div>
+   <div align="center"><span class="style4">If you will receive a payment from<br />
+     another country, click the flag:</span></div>
  </label></td>
  <td style="text-align:left"><div style="visibility: hidden;"><input type="checkbox" name="even_checker" id="even_checker" /></div></td>
 </tr>
 </table>
 <div style="margin-top:8px;">
   <div align="center"><strong>
-  <img src="images/flags/united_states.png" alt="US" name="flag_united_states" id="flag_united_states" title="estádos Unidos" />
-  <img id="flag_canada" src="images/flags/canada.png" alt="Canada" title="Canadá" />
-  <img id="flag_united_kingdom" src="images/flags/united_kingdom.png" alt="UK" title="Reino Unido" />
-  <img id="flag_europe" src="images/flags/europe.png" alt="Europa" title="Europa" />
-  <img id="flag_france" src="images/flags/france.png" alt="Francia" title="Francia" />
+  <img src="images/flags/united_states.png" alt="US" name="flag_united_states" id="flag_united_states" title="United States" />
+  <img id="flag_canada" src="images/flags/canada.png" alt="Canada" title="Canada" />
+  <img id="flag_united_kingdom" src="images/flags/united_kingdom.png" alt="UK" title="United Kingdom" />
+  <img id="flag_europe" src="images/flags/europe.png" alt="Europe" title="Europe" />
+  <img id="flag_france" src="images/flags/france.png" alt="France" title="France" />
   <img id="flag_espana" src="images/flags/espana.png" alt="España" title="España" />
-  <img id="flag_germany" src="images/flags/germany.png" alt="Alemania" title="Alemania" />
+  <img id="flag_germany" src="images/flags/germany.png" alt="Germany" title="Germany" />
   <img id="flag_australia" src="images/flags/australia.png" alt="Australia" title="Australia" />
-  <img id="flag_japan" src="images/flags/japan.png" alt="Japon" title="Japón" />
-  <img id="flag_czech_republic" src="images/flags/czech_republic.png" alt="República Checa" title="Republica Checa" /><br />
-  <img id="flag_hungary" src="images/flags/hungary.png"  alt="Hungaria" title="Hungaria" />
-  <img id="flag_poland" src="images/flags/poland.png" alt="Polonia" title="Polonia" />
-  <img id="flag_denmark" src="images/flags/denmark.png" alt="Dinamarca" title="Dinamarca" />
-  <img id="flag_norway" src="images/flags/norway.png" alt="Noruega" title="Noruega" />
-  <img id="flag_sweden" src="images/flags/sweden.png" alt="Suecia" title="Suecia" />
-  <img id="flag_switzerland" src="images/flags/switzerland.png" alt="Suiza" title="Suiza" />
-  <img id="flag_singapore" src="images/flags/singapore.png" alt="Singapur" title="Singapur" />
+  <img id="flag_japan" src="images/flags/japan.png" alt="Japan" title="Japan" />
+  <img id="flag_czech_republic" src="images/flags/czech_republic.png" alt="Czech Republic" title="Czech Republic" /><br />
+  <img id="flag_hungary" src="images/flags/hungary.png"  alt="Hungary" title="Hungary" />
+  <img id="flag_poland" src="images/flags/poland.png" alt="Poland" title="Poland" />
+  <img id="flag_denmark" src="images/flags/denmark.png" alt="Denmark" title="Denmark" />
+  <img id="flag_norway" src="images/flags/norway.png" alt="Norway" title="Norway" />
+  <img id="flag_sweden" src="images/flags/sweden.png" alt="Sweden" title="Sweden" />
+  <img id="flag_switzerland" src="images/flags/switzerland.png" alt="Switzerland" title="Switzerland" />
+  <img id="flag_singapore" src="images/flags/singapore.png" alt="Singapore" title="Singapore" />
   <img id="flag_hong_kong" src="images/flags/hong_kong.png" alt="Hong Kong" title="Hong Kong" />
-  <img id="flag_new_zealand" src="images/flags/new_zealand.png" alt="Nueva Zelanda" title="Nueva Zelanda" />
-  <img id="flag_peru" src="images/flags/peru.png" alt="Peru" title="Perú" />
+  <img id="flag_new_zealand" src="images/flags/new_zealand.png" alt="New Zealand" title="New Zealand" />
+  <img id="flag_peru" src="images/flags/peru.png" alt="Peru" title="Peru" />
   </strong></div>
 </div>
 </form>
